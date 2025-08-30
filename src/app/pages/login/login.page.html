@@ -5,5 +5,22 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-input label="email"></app-input>
+  <div class="login-container">
+    <form>
+      <app-input
+        label="Email"
+        placeholder="example:ana@gmail.com"
+        type="email"
+        [(ngModel)]="loginData.email"
+        name="email"
+      ></app-input>
+      <app-input
+        label="Password"
+        placeholder="Example:*******"
+        type="Password"
+        [(ngModel)]="loginData.password"
+      ></app-input>
+      <app-button label="Login" type="submit"> </app-button>
+    </form>
+  </div>
 </ion-content>
