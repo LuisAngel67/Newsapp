@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from 'src/app/modules/shared/shared-module';
 
 @Component({
@@ -8,12 +9,14 @@ import { SharedModule } from 'src/app/modules/shared/shared-module';
   standalone: false,
 })
 export class LoginPage implements OnInit {
-  loginData = {
-    email: '',
-    password: '',
-  };
+  loginForm!: FormGroup;
 
-  constructor() {}
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
 }

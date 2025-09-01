@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-form',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class UserFormComponent implements OnInit {
+  userForm!: FormGroup;
   constructor() {}
 
   ngOnInit() {}
+
+  onSubmit(): void {
+    if (this.userForm.valid) {
+      console.log(this.userForm.value);
+    }
+  }
 }

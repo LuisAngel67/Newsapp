@@ -1,13 +1,21 @@
 import { Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InputComponent } from 'src/app/components/input/input.component';
-import { ButtonComponent } from 'src/app/components/button/button.component';
-import { FormsModule } from '@angular/forms';
+import { InputComponent } from 'src/app/modules/shared/components/input/input.component';
+import { ButtonComponent } from 'src/app/modules/shared/components/button/button.component';
 import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 @NgModule({
-  declarations: [InputComponent, ButtonComponent],
-  imports: [CommonModule, FormsModule, IonicModule],
-  exports: [InputComponent, ButtonComponent],
+  declarations: [InputComponent, ButtonComponent, UserFormComponent],
+  imports: [
+    CommonModule,
+    IonicModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+  ],
+  exports: [InputComponent, ButtonComponent, UserFormComponent],
 })
 export class SharedModule {}

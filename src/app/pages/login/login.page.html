@@ -1,26 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <ion-card class="form-container">
+    <ion-card-header>
+      <ion-card-title class="form-title">Login</ion-card-title>
+    </ion-card-header>
 
-<ion-content [fullscreen]="true">
-  <div class="login-container">
-    <form>
-      <app-input
-        label="Email"
-        placeholder="example:ana@gmail.com"
-        type="email"
-        [(ngModel)]="loginData.email"
-        name="email"
-      ></app-input>
-      <app-input
-        label="Password"
-        placeholder="Example:*******"
-        type="Password"
-        [(ngModel)]="loginData.password"
-      ></app-input>
-      <app-button label="Login" type="submit"> </app-button>
-    </form>
-  </div>
+    <ion-card-content>
+      <div class="container">
+        <form [formGroup]="loginForm">
+          <app-input
+            label="Email"
+            placeholder="example@gmail.com"
+            type="email"
+            formControlName="email"
+          ></app-input>
+
+          <app-input
+            label="Password"
+            placeholder="*******"
+            type="Password"
+            formControlName="password"
+          ></app-input>
+
+          <app-button label="Login" type="submit"> </app-button>
+
+          <ion-router-link class="link" routerLink="/register">
+            Don't have an account? Register
+          </ion-router-link>
+        </form>
+      </div>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
