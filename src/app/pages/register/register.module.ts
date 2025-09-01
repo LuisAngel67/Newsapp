@@ -8,6 +8,7 @@ import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
 import { SharedModule } from 'src/app/modules/shared/shared-module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { SharedModule } from 'src/app/modules/shared/shared-module';
     RegisterPageRoutingModule,
     SharedModule,
     ReactiveFormsModule,
+    HttpClientModule,
   ],
   declarations: [RegisterPage],
 })

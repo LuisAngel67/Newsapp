@@ -1,41 +1,55 @@
-<ion-card class="form-container">
-  <ion-card-header>
-    <ion-card-title class="form-title">Register</ion-card-title>
-  </ion-card-header>
+<ion-content>
+  <ion-card class="form-container">
+    <ion-card-header>
+      <ion-card-title class="form-title">Register</ion-card-title>
+    </ion-card-header>
 
-  <ion-card-content>
-    <div class="container">
-      <form [formGroup]="registerForm">
-        <app-input
-          formControlName="name"
-          label="First Name"
-          type="text"
-        ></app-input>
-        <app-input
-          formControlName="lastName"
-          label="Last Name"
-          type="text"
-        ></app-input>
-        <app-input
-          formControlName="email"
-          label="Email"
-          type="email"
-        ></app-input>
-        <app-input
-          formControlName="password"
-          label="Password"
-          type="password"
-        ></app-input>
-        <app-input
-          formControlName="confirmPassword"
-          label="Confirm Password"
-          type="password"
-        ></app-input>
-        <app-button [type]="'submit'" label="Register"></app-button>
-        <ion-router-link class="link" routerLink="/login">
-          Already registered?
-        </ion-router-link>
-      </form>
-    </div>
-  </ion-card-content>
-</ion-card>
+    <ion-card-content>
+      <div class="container">
+        <form [formGroup]="registerForm">
+          <app-input
+            formControlName="name"
+            label="First Name"
+            type="text"
+          ></app-input>
+          <app-input
+            formControlName="lastName"
+            label="Last Name"
+            type="text"
+          ></app-input>
+          <ion-item>
+            <ion-label>País</ion-label>
+
+            <ion-select
+              formControlName="country"
+              placeholder="Selecciona un país"
+            >
+              <ion-select-option *ngFor="let c of countries" [value]="c.name">
+                {{ c.unicodeFlag }} {{ c.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <app-input
+            formControlName="email"
+            label="Email"
+            type="email"
+          ></app-input>
+          <app-input
+            formControlName="password"
+            label="Password"
+            type="password"
+          ></app-input>
+          <app-input
+            formControlName="confirmPassword"
+            label="Confirm Password"
+            type="password"
+          ></app-input>
+          <app-button [type]="'submit'" label="Register"></app-button>
+          <ion-router-link class="link" routerLink="/login">
+            Already registered?
+          </ion-router-link>
+        </form>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
