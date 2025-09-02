@@ -13,6 +13,17 @@
             type="email"
             formControlName="email"
           ></app-input>
+          <div
+            *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+            class="error"
+          >
+            <small *ngIf="loginForm.get('email')?.errors?.['required']">
+              Email is required
+            </small>
+            <small *ngIf="loginForm.get('email')?.errors?.['email']">
+              Invalid email
+            </small>
+          </div>
 
           <app-input
             label="Password"
@@ -20,8 +31,20 @@
             type="Password"
             formControlName="password"
           ></app-input>
+          <div
+            *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+            class="error"
+          >
+            <small *ngIf="loginForm.get('password')?.errors?.['required']">
+              Password is required
+            </small>
+            <small *ngIf="loginForm.get('password')?.errors?.['minlength']">
+              Password must be at least 4 characters
+            </small>
+          </div>
 
-          <app-button label="Login" type="submit"> </app-button>
+          <app-button label="Login" [type]="'submit'" (click)="login()">
+          </app-button>
 
           <ion-router-link class="link" routerLink="/register">
             Don't have an account? Register
