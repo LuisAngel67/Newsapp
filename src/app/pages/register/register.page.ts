@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/interfaces/user';
 import { SharedModule } from 'src/app/modules/shared/shared-module';
 import { CountryService } from 'src/app/services/countryService';
+import { Storage } from 'src/app/services/storage';
+import { ToastService } from 'src/app/services/toast';
 
 @Component({
   selector: 'app-register',
@@ -12,9 +15,12 @@ import { CountryService } from 'src/app/services/countryService';
 export class RegisterPage implements OnInit {
   countries: any[] = [];
   registerForm!: FormGroup;
+  emailExists: boolean = false;
   constructor(
     private fb: FormBuilder,
-    private countryService: CountryService
+    private countryService: CountryService,
+    private storageService: Storage,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -49,5 +55,53 @@ export class RegisterPage implements OnInit {
         console.error('Error cargando países:', err);
       },
     });
+  }
+
+  onSubmit() {
+    if (this.registerForm.valid) {
+      this.saveUser();
+    } else {
+      console.log('Form is invalid');
+      this.registerForm.markAllAsTouched();
+    }
+  }
+
+  saveUser() {
+    if (this.registerForm.invalid) {
+      // Validación de campos obligatorios
+      this.toastService.present('Please fill all required fields');
+      return;
+    }
+
+    if (this.registerForm.errors?.['mismatch']) {
+      // Validación de password mismatch
+      this.toastService.present('Passwords do not match');
+      return;
+    }
+
+    const users: User[] = this.storageService.get('users') || [];
+
+    const emailExists = users.some(
+      (u: User) => u.email === this.registerForm.value.email
+    );
+    if (emailExists) {
+      this.toastService.present('This email is already registered');
+      return;
+    }
+
+    const newUser: User = {
+      name: this.registerForm.value.name,
+      lastName: this.registerForm.value.lastName,
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+      country: this.registerForm.value.country,
+    };
+
+    users.push(newUser);
+    this.storageService.set('users', users);
+
+    this.toastService.present('User registered successfully', 1500, 'success');
+
+    this.registerForm.reset();
   }
 }
