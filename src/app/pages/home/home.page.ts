@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NewsService } from 'src/app/services/news';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,22 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class HomePage implements OnInit {
-  constructor() {}
+  topHeadlines: any[] = [];
 
-  ngOnInit() {}
+  constructor(private newsService: NewsService) {}
+
+  ngOnInit() {
+    this.loadTopHeadlines();
+  }
+
+  loadTopHeadlines() {
+    this.newsService.getTopHeadlines('us').subscribe({
+      next: (res) => {
+        this.topHeadlines = res.articles;
+      },
+      error: (err) => {
+        console.error('Error fetching news:', err);
+      },
+    });
+  }
 }
