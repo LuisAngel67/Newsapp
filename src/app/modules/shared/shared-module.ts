@@ -6,9 +6,17 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserFormComponent } from './components/user-form/user-form.component';
+import { CardComponent } from './components/card/card.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
-  declarations: [InputComponent, ButtonComponent, UserFormComponent],
+  declarations: [
+    InputComponent,
+    ButtonComponent,
+    UserFormComponent,
+    CardComponent,
+    ModalComponent,
+  ],
   imports: [
     CommonModule,
     IonicModule,
@@ -16,6 +24,12 @@ import { UserFormComponent } from './components/user-form/user-form.component';
     RouterModule,
     ReactiveFormsModule,
   ],
-  exports: [InputComponent, ButtonComponent, UserFormComponent],
+  exports: [
+    InputComponent,
+    ButtonComponent,
+    UserFormComponent,
+    CardComponent,
+    ModalComponent,
+  ],
 })
 export class SharedModule {}

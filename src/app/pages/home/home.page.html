@@ -5,13 +5,31 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-card *ngFor="let news of topHeadlines">
-      <img *ngIf="news.urlToImage" [src]="news.urlToImage" />
-      <ion-card-header>
-        <ion-card-title>{{ news.title }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content> {{ news.description }} </ion-card-content>
-    </ion-card>
-  </ion-list>
+  <div class="home-container">
+    <!-- Noticia principal -->
+    <app-card
+      *ngIf="topNews.length"
+      [news]="topNews[0]"
+      [size]="'large'"
+      (open)="openNewsModal($event)"
+    ></app-card>
+
+    <!-- Resto de noticias -->
+    <div class="other-news" *ngIf="topNews.length > 1">
+      <app-card
+        *ngFor="let news of topNews.slice(1)"
+        [news]="news"
+        [size]="'small'"
+        (open)="openNewsModal($event)"
+      ></app-card>
+    </div>
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" threshold="100px">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more news..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

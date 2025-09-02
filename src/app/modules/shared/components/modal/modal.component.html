@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ news?.title }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="modal-content">
+    <img *ngIf="news?.urlToImage" [src]="news.urlToImage" />
+    <h2>{{ news?.title }}</h2>
+    <p>{{ news?.description }}</p>
+    <app-button
+      expand="block"
+      (click)="openInBrowser()"
+      label="Read Full Article"
+    ></app-button>
+  </div>
+</ion-content>
