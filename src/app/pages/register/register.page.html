@@ -12,14 +12,31 @@
             label="First Name"
             type="text"
           ></app-input>
+          <div
+            *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
+            class="error"
+          >
+            <small *ngIf="registerForm.get('name')?.errors?.['required']"
+              >First name is required</small
+            >
+          </div>
+
           <app-input
             formControlName="lastName"
             label="Last Name"
             type="text"
           ></app-input>
+          <div
+            *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
+            class="error"
+          >
+            <small *ngIf="registerForm.get('lastName')?.errors?.['required']"
+              >Last name is required</small
+            >
+          </div>
+
           <ion-item>
             <ion-label>País</ion-label>
-
             <ion-select
               formControlName="country"
               placeholder="Selecciona un país"
@@ -29,22 +46,74 @@
               </ion-select-option>
             </ion-select>
           </ion-item>
+          <div
+            *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched"
+            class="error"
+          >
+            <small>Country is required</small>
+          </div>
+
           <app-input
             formControlName="email"
             label="Email"
             type="email"
           ></app-input>
+          <div
+            *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+            class="error"
+          >
+            <small *ngIf="registerForm.get('email')?.errors?.['required']"
+              >Email is required</small
+            >
+            <small *ngIf="registerForm.get('email')?.errors?.['email']"
+              >Invalid email format</small
+            >
+          </div>
+
           <app-input
             formControlName="password"
             label="Password"
             type="password"
           ></app-input>
+          <div
+            *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+            class="error"
+          >
+            <small *ngIf="registerForm.get('password')?.errors?.['required']"
+              >Password is required</small
+            >
+            <small *ngIf="registerForm.get('password')?.errors?.['minlength']"
+              >Password must be at least 4 characters</small
+            >
+          </div>
+
           <app-input
             formControlName="confirmPassword"
             label="Confirm Password"
             type="password"
           ></app-input>
-          <app-button [type]="'submit'" label="Register"></app-button>
+          <div
+            *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+            class="error"
+          >
+            <small
+              *ngIf="registerForm.get('confirmPassword')?.errors?.['required']"
+              >Confirm password is required</small
+            >
+          </div>
+          <div
+            *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched"
+            class="error"
+          >
+            <small>Passwords do not match</small>
+          </div>
+
+          <app-button
+            type="submit"
+            label="Register"
+            [disabled]="registerForm.invalid"
+          ></app-button>
+
           <ion-router-link class="link" routerLink="/login">
             Already registered?
           </ion-router-link>

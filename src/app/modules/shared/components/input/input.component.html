@@ -4,10 +4,10 @@
   }}</ion-label>
   <ion-input
     [type]="type"
-    [(ngModel)]="value"
+    [value]="value"
     [placeholder]="isFocused ? placeholder : ''"
     (ionFocus)="onFocus()"
-    (ionBlur)="onBlur()"
+    (ionBlur)="onBlur(); onTouched()"
     (ionInput)="onInput($event)"
   >
   </ion-input>

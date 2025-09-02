@@ -19,14 +19,23 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.loadCountries();
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', [Validators.required]],
-      country: ['', Validators.required],
-    });
+    this.registerForm = this.fb.group(
+      {
+        name: ['', Validators.required],
+        lastName: ['', Validators.required],
+        country: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(4)]],
+        confirmPassword: ['', [Validators.required]],
+      },
+      { validators: this.passwordsMatch }
+    );
+  }
+
+  passwordsMatch(form: FormGroup) {
+    const password = form.get('password')?.value;
+    const confirmPassword = form.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { mismatch: true };
   }
 
   loadCountries() {

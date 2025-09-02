@@ -12,6 +12,7 @@
     transition: all 0.2s ease;
     color: gray;
     pointer-events: none;
+     white-space: nowrap;
   }
 
   ion-label.floating-label.active {
