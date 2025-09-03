@@ -5,6 +5,7 @@ import { ToastService } from 'src/app/services/toast';
 import { EncryptService } from 'src/app/services/encrypt';
 import { CountryService } from 'src/app/services/countryService';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +22,8 @@ export class ProfilePage implements OnInit {
     private toast: ToastService,
     private encryptService: EncryptService,
     private countryService: CountryService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -30,13 +32,12 @@ export class ProfilePage implements OnInit {
   }
 
   loadCountries() {
-    this.countryService.getCountries().subscribe({
-      next: (res: any) => {
-        this.countries = res.data.sort((a: any, b: any) =>
+    this.http.get<any>('assets/countries.json').subscribe({
+      next: (res) => {
+        this.countries = res.sort((a: any, b: any) =>
           a.name.localeCompare(b.name)
         );
       },
-      error: (err) => console.error(err),
     });
   }
 

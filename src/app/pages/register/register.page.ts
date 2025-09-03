@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/interfaces/user';
-import { SharedModule } from 'src/app/modules/shared/shared-module';
-import { CountryService } from 'src/app/services/countryService';
 import { Storage } from 'src/app/services/storage';
 import { ToastService } from 'src/app/services/toast';
 import { EncryptService } from 'src/app/services/encrypt';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -21,15 +20,16 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private countryService: CountryService,
     private storageService: Storage,
     private toastService: ToastService,
     private encryptService: EncryptService,
-    private router: Router
+    private router: Router,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
     this.loadCountries();
+
     this.registerForm = this.fb.group(
       {
         name: ['', Validators.required],
@@ -50,14 +50,11 @@ export class RegisterPage implements OnInit {
   }
 
   loadCountries() {
-    this.countryService.getCountries().subscribe({
+    this.http.get<any>('assets/countries.json').subscribe({
       next: (res) => {
-        this.countries = res.data.sort((a: any, b: any) =>
+        this.countries = res.sort((a: any, b: any) =>
           a.name.localeCompare(b.name)
         );
-      },
-      error: (err) => {
-        console.error('Error cargando países:', err);
       },
     });
   }
@@ -66,8 +63,8 @@ export class RegisterPage implements OnInit {
     if (this.registerForm.valid) {
       this.saveUser();
     } else {
-      console.log('Form is invalid');
       this.registerForm.markAllAsTouched();
+      this.toastService.present('Please fill all required fields');
     }
   }
 
