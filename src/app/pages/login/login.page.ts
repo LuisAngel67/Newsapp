@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SharedModule } from 'src/app/modules/shared/shared-module';
 import { Storage } from 'src/app/services/storage';
 import { ToastService } from 'src/app/services/toast';
 import { User } from 'src/app/interfaces/user';
@@ -45,7 +44,6 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    // Comparar la contraseña ingresada con la almacenada
     const validPassword = this.encryptService.compare(
       this.loginForm.value.password,
       user.password
@@ -56,7 +54,8 @@ export class LoginPage implements OnInit {
       return;
     }
 
-    // Login exitoso
+    this.storageService.set('currentUser', user);
+
     this.toastService.present(`Welcome ${user.name}!`, 1500, 'success');
     this.router.navigate(['/home']);
   }

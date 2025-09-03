@@ -1,0 +1,12 @@
+<ion-card class="principal-news-card" (click)="onClick()">
+  <img *ngIf="news?.urlToImage" [src]="news.urlToImage" alt="news image" />
+  <ion-card-header>
+    <ion-card-title>{{ news?.title }}</ion-card-title>
+    <ion-card-subtitle *ngIf="news?.source?.name">{{
+      news.source.name
+    }}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <p>{{ news?.description }}</p>
+  </ion-card-content>
+</ion-card>

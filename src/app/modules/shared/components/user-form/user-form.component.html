@@ -1,8 +1,69 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <app-input label="Correo" type="email" formControlName="email"> </app-input>
+  <app-input label="First Name" type="text" formControlName="name"></app-input>
+  <div
+    *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched"
+    class="error"
+  >
+    <small *ngIf="userForm.get('name')?.errors?.['required']"
+      >First name is required</small
+    >
+  </div>
 
-  <app-input label="Contraseña" type="password" formControlName="password">
-  </app-input>
+  <app-input
+    label="Last Name"
+    type="text"
+    formControlName="lastName"
+  ></app-input>
+  <div
+    *ngIf="
+      userForm.get('lastName')?.invalid && userForm.get('lastName')?.touched
+    "
+    class="error"
+  >
+    <small *ngIf="userForm.get('lastName')?.errors?.['required']"
+      >Last name is required</small
+    >
+  </div>
 
-  <app-button type="submit"> Registrarse </app-button>
+  <app-select
+    label="Country"
+    formControlName="country"
+    [options]="countries"
+  ></app-select>
+  <div
+    *ngIf="userForm.get('country')?.invalid && userForm.get('country')?.touched"
+    class="error"
+  >
+    <small>Country is required</small>
+  </div>
+
+  <app-input label="Email" type="email" formControlName="email"></app-input>
+  <div
+    *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched"
+    class="error"
+  >
+    <small *ngIf="userForm.get('email')?.errors?.['required']"
+      >Email is required</small
+    >
+    <small *ngIf="userForm.get('email')?.errors?.['email']"
+      >Invalid email format</small
+    >
+  </div>
+
+  <app-input
+    label="Current Password"
+    type="password"
+    formControlName="currentPassword"
+  ></app-input>
+  <app-input
+    label="New Password"
+    type="password"
+    formControlName="newPassword"
+  ></app-input>
+
+  <app-button
+    type="submit"
+    [disabled]="isFormInvalid"
+    label="Update Profile"
+  ></app-button>
 </form>

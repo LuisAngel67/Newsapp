@@ -1,20 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
+<ion-menu side="start" menuId="first" contentId="main-content">
+  <app-sidebar></app-sidebar>
+</ion-menu>
+
+<ion-router-outlet id="main-content"></ion-router-outlet>
+
+<ion-header>
+  <app-header></app-header>
 </ion-header>
 
 <ion-content>
   <div class="home-container">
-    <!-- Noticia principal -->
-    <app-card
-      *ngIf="topNews.length"
+    <app-principal-news
       [news]="topNews[0]"
-      [size]="'large'"
       (open)="openNewsModal($event)"
-    ></app-card>
+    ></app-principal-news>
 
-    <!-- Resto de noticias -->
     <div class="other-news" *ngIf="topNews.length > 1">
       <app-card
         *ngFor="let news of topNews.slice(1)"

@@ -6,6 +6,7 @@ import { CountryService } from 'src/app/services/countryService';
 import { Storage } from 'src/app/services/storage';
 import { ToastService } from 'src/app/services/toast';
 import { EncryptService } from 'src/app/services/encrypt';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -23,7 +24,8 @@ export class RegisterPage implements OnInit {
     private countryService: CountryService,
     private storageService: Storage,
     private toastService: ToastService,
-    private encryptService: EncryptService
+    private encryptService: EncryptService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -105,5 +107,6 @@ export class RegisterPage implements OnInit {
     this.toastService.present('User registered successfully', 1500, 'success');
 
     this.registerForm.reset();
+    this.router.navigate(['/login']);
   }
 }

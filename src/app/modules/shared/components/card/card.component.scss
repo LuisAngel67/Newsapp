@@ -1,35 +1,23 @@
 .news-card {
   cursor: pointer;
-  margin: 10px 0;
+  width: calc(50% - 20px);
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
 
-  &.large {
-    img {
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    ion-card-title {
-      font-size: 1.4rem;
-      font-weight: bold;
-    }
-    ion-card-content {
-      font-size: 1rem;
-    }
+  img {
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
   }
 
-  &.small {
-    img {
-      height: 100px;
-      object-fit: cover;
-      border-radius: 6px;
-    }
-    ion-card-title {
-      font-size: 1.1rem;
-      font-weight: 500;
-    }
-    ion-card-content {
-      font-size: 0.9rem;
-      color: #555;
-    }
+  ion-card-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  ion-card-content {
+    font-size: 0.9rem;
+    color: #555;
   }
 }

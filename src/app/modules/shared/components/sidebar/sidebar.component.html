@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="mostaza">
+    <ion-title>Categories</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="sidebar-content">
+  <ion-list class="categories">
+    <ion-item *ngFor="let cat of categories" (click)="selectCategory(cat)">
+      {{ cat | titlecase }}
+    </ion-item>
+  </ion-list>
+  <ion-list class="normal">
+    <ion-item *ngFor="let item of menuItems" (click)="navigate(item)">
+      <ion-icon [name]="item.icon" slot="start"></ion-icon>
+      {{ item.label }}
+    </ion-item>
+  </ion-list>
+</ion-content>
