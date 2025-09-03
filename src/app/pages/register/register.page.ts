@@ -63,7 +63,6 @@ export class RegisterPage implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.registerForm.value);
     if (this.registerForm.valid) {
       this.saveUser();
     } else {

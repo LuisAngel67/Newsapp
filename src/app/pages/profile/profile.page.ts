@@ -88,4 +88,7 @@ export class ProfilePage implements OnInit {
     await this.toast.present('Profile updated successfully', 1500, 'success');
     this.router.navigate(['/home']);
   }
+  cancel() {
+    this.router.navigate(['/home']);
+  }
 }

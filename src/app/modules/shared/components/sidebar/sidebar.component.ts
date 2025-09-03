@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { CategoryService } from 'src/app/services/category';
 import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Storage } from 'src/app/services/storage';
+import { ToastService } from 'src/app/services/toast';
 
 @Component({
   selector: 'app-sidebar',
@@ -29,9 +31,11 @@ export class SidebarComponent {
   ];
 
   constructor(
+    private storage: Storage,
     private categoryService: CategoryService,
     private menuCtrl: MenuController,
-    private router: Router
+    private router: Router,
+    private toast: ToastService
   ) {}
 
   selectCategory(cat: string) {
@@ -43,5 +47,13 @@ export class SidebarComponent {
     if (item.route) {
       this.router.navigate([item.route]);
     }
+  }
+
+  logout() {
+    this.storage.remove('currentUser');
+
+    this.toast.present('Logged out successfully', 1500, 'success');
+
+    this.router.navigate(['/login']);
   }
 }

@@ -1,15 +1,23 @@
 <ion-content>
-  <ion-card class="form-container">
-    <ion-card-header>
-      <ion-card-title>Update Profile</ion-card-title>
-    </ion-card-header>
+  <div class="center-wrapper">
+    <ion-card class="form-container">
+      <ion-card-header>
+        <ion-card-title>Update Profile</ion-card-title>
+        <app-button
+          type="button"
+          label="Cancel"
+          (click)="cancel()"
+          color="medium"
+        ></app-button>
+      </ion-card-header>
 
-    <ion-card-content>
-      <app-user-form
-        [user]="currentUser"
-        [countries]="countries"
-        (submitForm)="onSubmit($event)"
-      ></app-user-form>
-    </ion-card-content>
-  </ion-card>
+      <ion-card-content>
+        <app-user-form
+          [user]="currentUser"
+          [countries]="countries"
+          (submitForm)="onSubmit($event)"
+        ></app-user-form>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

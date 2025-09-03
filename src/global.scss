@@ -60,3 +60,14 @@
 .error{
 color: red;
 }
+
+
+
+.center-wrapper {
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  height: 100vh;           
+  padding: 16px;          
+  box-sizing: border-box;
+}

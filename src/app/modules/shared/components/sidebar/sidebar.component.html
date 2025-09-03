@@ -16,4 +16,8 @@
       {{ item.label }}
     </ion-item>
   </ion-list>
+  <ion-item button (click)="logout()">
+    <ion-icon slot="start" name="log-out-outline"></ion-icon>
+    <ion-label>Logout</ion-label>
+  </ion-item>
 </ion-content>

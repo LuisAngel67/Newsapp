@@ -1,120 +1,124 @@
 <ion-content>
-  <ion-card class="form-container">
-    <ion-card-header>
-      <ion-card-title class="form-title">Register</ion-card-title>
-    </ion-card-header>
+  <div class="center-wrapper">
+    <ion-card class="form-container">
+      <ion-card-header>
+        <ion-card-title class="form-title">Register</ion-card-title>
+      </ion-card-header>
 
-    <ion-card-content>
-      <div class="container">
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-          <app-input
-            formControlName="name"
-            label="First Name"
-            type="text"
-          ></app-input>
-          <div
-            *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
-            class="error"
-          >
-            <small *ngIf="registerForm.get('name')?.errors?.['required']"
-              >First name is required</small
+      <ion-card-content>
+        <div class="container">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <app-input
+              formControlName="name"
+              label="First Name"
+              type="text"
+            ></app-input>
+            <div
+              *ngIf="registerForm.get('name')?.invalid && registerForm.get('name')?.touched"
+              class="error"
             >
-          </div>
+              <small *ngIf="registerForm.get('name')?.errors?.['required']"
+                >First name is required</small
+              >
+            </div>
 
-          <app-input
-            formControlName="lastName"
-            label="Last Name"
-            type="text"
-          ></app-input>
-          <div
-            *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
-            class="error"
-          >
-            <small *ngIf="registerForm.get('lastName')?.errors?.['required']"
-              >Last name is required</small
+            <app-input
+              formControlName="lastName"
+              label="Last Name"
+              type="text"
+            ></app-input>
+            <div
+              *ngIf="registerForm.get('lastName')?.invalid && registerForm.get('lastName')?.touched"
+              class="error"
             >
-          </div>
+              <small *ngIf="registerForm.get('lastName')?.errors?.['required']"
+                >Last name is required</small
+              >
+            </div>
 
-          <app-select
-            formControlName="country"
-            label="Select Country"
-            [options]="countries"
-          >
-          </app-select>
-          <div
-            *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched"
-            class="error"
-          >
-            <small>Country is required</small>
-          </div>
-
-          <app-input
-            formControlName="email"
-            label="Email"
-            type="email"
-          ></app-input>
-          <div
-            *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
-            class="error"
-          >
-            <small *ngIf="registerForm.get('email')?.errors?.['required']"
-              >Email is required</small
+            <app-select
+              formControlName="country"
+              label="Select Country"
+              [options]="countries"
             >
-            <small *ngIf="registerForm.get('email')?.errors?.['email']"
-              >Invalid email format</small
+            </app-select>
+            <div
+              *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched"
+              class="error"
             >
-            <small *ngIf="emailExists">This email is already registered</small>
-          </div>
+              <small>Country is required</small>
+            </div>
 
-          <app-input
-            formControlName="password"
-            label="Password"
-            type="password"
-          ></app-input>
-          <div
-            *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
-            class="error"
-          >
-            <small *ngIf="registerForm.get('password')?.errors?.['required']"
-              >Password is required</small
+            <app-input
+              formControlName="email"
+              label="Email"
+              type="email"
+            ></app-input>
+            <div
+              *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
+              class="error"
             >
-            <small *ngIf="registerForm.get('password')?.errors?.['minlength']"
-              >Password must be at least 4 characters</small
+              <small *ngIf="registerForm.get('email')?.errors?.['required']"
+                >Email is required</small
+              >
+              <small *ngIf="registerForm.get('email')?.errors?.['email']"
+                >Invalid email format</small
+              >
+              <small *ngIf="emailExists"
+                >This email is already registered</small
+              >
+            </div>
+
+            <app-input
+              formControlName="password"
+              label="Password"
+              type="password"
+            ></app-input>
+            <div
+              *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched"
+              class="error"
             >
-          </div>
+              <small *ngIf="registerForm.get('password')?.errors?.['required']"
+                >Password is required</small
+              >
+              <small *ngIf="registerForm.get('password')?.errors?.['minlength']"
+                >Password must be at least 4 characters</small
+              >
+            </div>
 
-          <app-input
-            formControlName="confirmPassword"
-            label="Confirm Password"
-            type="password"
-          ></app-input>
-          <div
-            *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
-            class="error"
-          >
-            <small
-              *ngIf="registerForm.get('confirmPassword')?.errors?.['required']"
-              >Confirm password is required</small
+            <app-input
+              formControlName="confirmPassword"
+              label="Confirm Password"
+              type="password"
+            ></app-input>
+            <div
+              *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched"
+              class="error"
             >
-          </div>
-          <div
-            *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched"
-            class="error"
-          >
-            <small>Passwords do not match</small>
-          </div>
+              <small
+                *ngIf="registerForm.get('confirmPassword')?.errors?.['required']"
+                >Confirm password is required</small
+              >
+            </div>
+            <div
+              *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched"
+              class="error"
+            >
+              <small>Passwords do not match</small>
+            </div>
 
-          <app-button
-            [type]="'submit'"
-            label="Register"
-            [disabled]="registerForm.invalid"
-          ></app-button>
+            <app-button
+              [type]="'submit'"
+              label="Register"
+              [disabled]="registerForm.invalid"
+            ></app-button>
 
-          <ion-router-link class="link" routerLink="/login">
-            Already registered?
-          </ion-router-link>
-        </form>
-      </div>
-    </ion-card-content>
-  </ion-card>
+            <ion-router-link class="link" routerLink="/login">
+              Already registered?
+            </ion-router-link>
+          </form>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

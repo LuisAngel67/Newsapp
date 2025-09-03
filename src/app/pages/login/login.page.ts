@@ -57,6 +57,7 @@ export class LoginPage implements OnInit {
     this.storageService.set('currentUser', user);
 
     this.toastService.present(`Welcome ${user.name}!`, 1500, 'success');
+
     this.router.navigate(['/home']);
   }
 }
