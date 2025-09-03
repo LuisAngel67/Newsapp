@@ -35,17 +35,12 @@
             >
           </div>
 
-          <ion-item>
-            <ion-label>País</ion-label>
-            <ion-select
-              formControlName="country"
-              placeholder="Selecciona un país"
-            >
-              <ion-select-option *ngFor="let c of countries" [value]="c.name">
-                {{ c.unicodeFlag }} {{ c.name }}
-              </ion-select-option>
-            </ion-select>
-          </ion-item>
+          <app-select
+            formControlName="country"
+            label="Select Country"
+            [options]="countries"
+          >
+          </app-select>
           <div
             *ngIf="registerForm.get('country')?.invalid && registerForm.get('country')?.touched"
             class="error"

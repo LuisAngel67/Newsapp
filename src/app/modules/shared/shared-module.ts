@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { CardComponent } from './components/card/card.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { SelectComponent } from './components/select/select.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ModalComponent } from './components/modal/modal.component';
     UserFormComponent,
     CardComponent,
     ModalComponent,
+    SelectComponent,
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ import { ModalComponent } from './components/modal/modal.component';
     UserFormComponent,
     CardComponent,
     ModalComponent,
+    SelectComponent,
   ],
 })
 export class SharedModule {}

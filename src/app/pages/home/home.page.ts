@@ -12,12 +12,12 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 })
 export class HomePage implements OnInit {
   topNews: any[] = [];
-  allNews: any[] = []; // guardamos las primeras 100 noticias (10 páginas)
+  allNews: any[] = [];
   page = 1;
   pageSize = 10;
   country = 'us';
   loading = false;
-  repeatIndex = 0; // índice para repetir noticias
+  repeatIndex = 0;
 
   constructor(
     private newsService: NewsService,
@@ -31,9 +31,7 @@ export class HomePage implements OnInit {
   loadNews(initial = false) {
     if (this.loading) return;
 
-    // Cuando superamos la página 10 -> dejamos de consultar API
     if (this.page > 10) {
-      // Tomamos un bloque de noticias ya guardadas
       const chunk: any[] = [];
       for (let i = 0; i < this.pageSize; i++) {
         const idx = (this.repeatIndex + i) % this.allNews.length;
@@ -43,7 +41,7 @@ export class HomePage implements OnInit {
         (this.repeatIndex + this.pageSize) % this.allNews.length;
 
       this.topNews = [...this.topNews, ...chunk];
-      return; // 👈 No llamar API
+      return;
     }
 
     if (initial) {
@@ -64,7 +62,6 @@ export class HomePage implements OnInit {
         next: (res: any) => {
           const newArticles = res?.articles || [];
 
-          // Guardamos todas las noticias que traiga la API
           this.allNews = [...this.allNews, ...newArticles];
           this.topNews = [...this.topNews, ...newArticles];
 
@@ -96,8 +93,6 @@ export class HomePage implements OnInit {
     const event = ev as InfiniteScrollCustomEvent;
 
     this.loadNews();
-
-    // 👇 cerramos el scroll inmediatamente
     event.target.complete();
   }
 }

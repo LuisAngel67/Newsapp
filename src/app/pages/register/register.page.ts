@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/modules/shared/shared-module';
 import { CountryService } from 'src/app/services/countryService';
 import { Storage } from 'src/app/services/storage';
 import { ToastService } from 'src/app/services/toast';
+import { EncryptService } from 'src/app/services/encrypt';
 
 @Component({
   selector: 'app-register',
@@ -16,11 +17,13 @@ export class RegisterPage implements OnInit {
   countries: any[] = [];
   registerForm!: FormGroup;
   emailExists: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private countryService: CountryService,
     private storageService: Storage,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private encryptService: EncryptService
   ) {}
 
   ngOnInit() {
@@ -58,6 +61,7 @@ export class RegisterPage implements OnInit {
   }
 
   onSubmit() {
+    console.log(this.registerForm.value);
     if (this.registerForm.valid) {
       this.saveUser();
     } else {
@@ -68,13 +72,11 @@ export class RegisterPage implements OnInit {
 
   saveUser() {
     if (this.registerForm.invalid) {
-      // Validación de campos obligatorios
       this.toastService.present('Please fill all required fields');
       return;
     }
 
     if (this.registerForm.errors?.['mismatch']) {
-      // Validación de password mismatch
       this.toastService.present('Passwords do not match');
       return;
     }
@@ -92,9 +94,9 @@ export class RegisterPage implements OnInit {
     const newUser: User = {
       name: this.registerForm.value.name,
       lastName: this.registerForm.value.lastName,
-      email: this.registerForm.value.email,
-      password: this.registerForm.value.password,
       country: this.registerForm.value.country,
+      email: this.registerForm.value.email,
+      password: this.encryptService.encrypt(this.registerForm.value.password),
     };
 
     users.push(newUser);

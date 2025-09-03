@@ -5,6 +5,7 @@ import { SharedModule } from 'src/app/modules/shared/shared-module';
 import { Storage } from 'src/app/services/storage';
 import { ToastService } from 'src/app/services/toast';
 import { User } from 'src/app/interfaces/user';
+import { EncryptService } from 'src/app/services/encrypt';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +20,8 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     private storageService: Storage,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private encryptService: EncryptService
   ) {}
 
   ngOnInit() {
@@ -36,20 +38,26 @@ export class LoginPage implements OnInit {
     }
 
     const users: User[] = this.storageService.get('users') || [];
-
-    const user = users.find(
-      (u: User) =>
-        u.email === this.loginForm.value.email &&
-        u.password === this.loginForm.value.password
-    );
+    const user = users.find((u) => u.email === this.loginForm.value.email);
 
     if (!user) {
       this.toastService.present('Invalid email or password');
       return;
     }
 
-    this.toastService.present(`Welcome ${user.name}!`, 1500, 'success');
+    // Comparar la contraseña ingresada con la almacenada
+    const validPassword = this.encryptService.compare(
+      this.loginForm.value.password,
+      user.password
+    );
 
+    if (!validPassword) {
+      this.toastService.present('Invalid email or password');
+      return;
+    }
+
+    // Login exitoso
+    this.toastService.present(`Welcome ${user.name}!`, 1500, 'success');
     this.router.navigate(['/home']);
   }
 }

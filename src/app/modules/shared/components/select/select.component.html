@@ -1,0 +1,12 @@
+<ion-item>
+  <ion-label>{{ label }}</ion-label>
+  <ion-select
+    [value]="value"
+    (ionChange)="onSelectChange($event)"
+    (ionBlur)="onTouched()"
+  >
+    <ion-select-option *ngFor="let opt of options" [value]="opt.name">
+      {{ opt.unicodeFlag }} {{ opt.name }}
+    </ion-select-option>
+  </ion-select>
+</ion-item>
